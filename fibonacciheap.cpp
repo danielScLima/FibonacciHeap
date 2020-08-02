@@ -1,17 +1,17 @@
 #include "fibonacciheap.h"
 #include <string>
 
-FibonacciHeap::FibonacciHeap()
+FibonacciHeapDS::FibonacciHeapDS()
 {
 
 }
 
-FibonacciHeap::~FibonacciHeap()
+FibonacciHeapDS::~FibonacciHeapDS()
 {
     dealockList(start, start);
 }
 
-void FibonacciHeap::dealockList(FibonacciHeapNode* initial, FibonacciHeapNode* currentNode)
+void FibonacciHeapDS::dealockList(FibonacciHeapNode* initial, FibonacciHeapNode* currentNode)
 {
     if (currentNode == nullptr)
         return;
@@ -30,7 +30,7 @@ void FibonacciHeap::dealockList(FibonacciHeapNode* initial, FibonacciHeapNode* c
     }
 }
 
-void FibonacciHeap::insertBeforeStart(struct FibonacciHeapNode* tmp)
+void FibonacciHeapDS::insertBeforeStart(struct FibonacciHeapNode* tmp)
 {
     if (this->nodeWithMinimumValue == nullptr)
         this->nodeWithMinimumValue = tmp;
@@ -59,7 +59,7 @@ void FibonacciHeap::insertBeforeStart(struct FibonacciHeapNode* tmp)
 }
 
 
-bool FibonacciHeap::decrementKey(int dataKey, int decrement)
+bool FibonacciHeapDS::decrementKey(int dataKey, int decrement)
 {
     FibonacciHeapNode *node = search(dataKey);
     if (node == nullptr)
@@ -83,7 +83,7 @@ bool FibonacciHeap::decrementKey(int dataKey, int decrement)
     return true;
 }
 
-void FibonacciHeap::changeNodePosition(FibonacciHeapNode* node)
+void FibonacciHeapDS::changeNodePosition(FibonacciHeapNode* node)
 {
     FibonacciHeapNode* backupFather = node->father;
     if (node->next == node) //não tem irmãos
@@ -122,31 +122,31 @@ void FibonacciHeap::changeNodePosition(FibonacciHeapNode* node)
         insertBeforeStart(node); //insere na lista principal
     }
 
-    node->marked = Marked::NO;
+    node->marked = FHMarked::FHMarkedNO;
 
     if (backupFather != nullptr)
         increaseMarkAndCheckCondition(backupFather);
 }
 
-void FibonacciHeap::increaseMarkAndCheckCondition(FibonacciHeapNode* node)
+void FibonacciHeapDS::increaseMarkAndCheckCondition(FibonacciHeapNode* node)
 {
-    if (node->marked == Marked::NO)
-        node->marked = Marked::YES;
-    else //node->marked == Marked::YES
+    if (node->marked == FHMarked::FHMarkedNO)
+        node->marked = FHMarked::FHMarkedYES;
+    else //node->marked == FHMarked::FHMarkedYES
     {
         changeNodePosition(node);
     }
 }
 
-FibonacciHeapNode *FibonacciHeap::search(int data)
+FibonacciHeapNode *FibonacciHeapDS::search(int data)
 {
     if (start == nullptr)
         return nullptr;
 
-    return FibonacciHeap::searchStartingOfNode(data, start);
+    return FibonacciHeapDS::searchStartingOfNode(data, start);
 }
 
-FibonacciHeapNode *FibonacciHeap::searchStartingOfNode
+FibonacciHeapNode *FibonacciHeapDS::searchStartingOfNode
 (
     int data,
     FibonacciHeapNode *initial
@@ -180,14 +180,14 @@ FibonacciHeapNode *FibonacciHeap::searchStartingOfNode
     return nullptr;
 }
 
-void FibonacciHeap::insertBeforeStart(int data)
+void FibonacciHeapDS::insertBeforeStart(int data)
 {
     struct FibonacciHeapNode* tmp = new FibonacciHeapNode(data);
     insertBeforeStart(tmp);
     this->countOfNodes++;
 }
 
-FibonacciHeapNode *FibonacciHeap::deleteMinInterface()
+FibonacciHeapNode *FibonacciHeapDS::deleteMinInterface()
 {
     FibonacciHeapNode* min = deleteMin();
     if (min != nullptr)
@@ -195,17 +195,17 @@ FibonacciHeapNode *FibonacciHeap::deleteMinInterface()
     return min;
 }
 
-FibonacciHeapNode *FibonacciHeap::getStartNode()
+FibonacciHeapNode *FibonacciHeapDS::getStartNode()
 {
     return this->start;
 }
 
-FibonacciHeapNode *FibonacciHeap::getMinNode()
+FibonacciHeapNode *FibonacciHeapDS::getMinNode()
 {
     return this->nodeWithMinimumValue;
 }
 
-FibonacciHeapNode *FibonacciHeap::removeBeforeStart()
+FibonacciHeapNode *FibonacciHeapDS::removeBeforeStart()
 {
     if (start == nullptr)
         return nullptr;
@@ -238,7 +238,7 @@ FibonacciHeapNode *FibonacciHeap::removeBeforeStart()
     }
 }
 
-std::vector<std::string> FibonacciHeap::getElementsAsVector()
+std::vector<std::string> FibonacciHeapDS::getElementsAsVector()
 {
     std::vector<std::string> vec;
 
@@ -260,7 +260,7 @@ std::vector<std::string> FibonacciHeap::getElementsAsVector()
     return vec;
 }
 
-void FibonacciHeap::getCodeOfNode(FibonacciHeapNode* node, std::string& nodeDeclaration)
+void FibonacciHeapDS::getCodeOfNode(FibonacciHeapNode* node, std::string& nodeDeclaration)
 {
     nodeDeclaration += std::to_string(node->data)+"[label=<";
     nodeDeclaration += "<TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"4\">";
@@ -277,7 +277,7 @@ void FibonacciHeap::getCodeOfNode(FibonacciHeapNode* node, std::string& nodeDecl
     nodeDeclaration += "  </TR>";
     nodeDeclaration += "  <TR>";
 
-    std::string msg = node->marked == YES? "true":"false";
+    std::string msg = node->marked == FHMarked::FHMarkedYES? "true":"false";
 
     nodeDeclaration += "    <TD COLSPAN=\"3\">Marked: "+msg+"</TD>";
     nodeDeclaration += "  </TR>";
@@ -288,7 +288,7 @@ void FibonacciHeap::getCodeOfNode(FibonacciHeapNode* node, std::string& nodeDecl
     nodeDeclaration += ">];";
 }
 
-void FibonacciHeap::getDrawStartingOfNodeByModeTwo
+void FibonacciHeapDS::getDrawStartingOfNodeByModeTwo
 (
     FibonacciHeapNode* initial,
     std::string& nodeDeclaration,
@@ -396,7 +396,7 @@ void FibonacciHeap::getDrawStartingOfNodeByModeTwo
     }
 }
 
-void FibonacciHeap::getDrawStartingOfNodeByModeOne
+void FibonacciHeapDS::getDrawStartingOfNodeByModeOne
 (
     FibonacciHeapNode* initial,
     std::string& textToFile
@@ -406,7 +406,7 @@ void FibonacciHeap::getDrawStartingOfNodeByModeOne
     std::string values;
     if (tmp != nullptr)
     {
-        if (tmp->marked == YES)
+        if (tmp->marked == FHMarked::FHMarkedYES)
         {
             textToFile += std::to_string(tmp->data)+
                     " [fillcolor=red style=filled fontcolor=white];";
@@ -428,7 +428,7 @@ void FibonacciHeap::getDrawStartingOfNodeByModeOne
         //Se tem filho, desenha link para filho e desenha tudo de filho
         if (tmp->children != nullptr)
         {
-            if (tmp->children->marked == YES)
+            if (tmp->children->marked == FHMarkedYES)
             {
                 textToFile += std::to_string(tmp->children->data)+
                         " [fillcolor=red style=filled fontcolor=white];";
@@ -444,7 +444,7 @@ void FibonacciHeap::getDrawStartingOfNodeByModeOne
         tmp = tmp->next;
         while(tmp != initial)
         {
-            if (tmp->marked == YES)
+            if (tmp->marked == FHMarkedYES)
             {
                 textToFile += std::to_string(tmp->data)+
                         " [fillcolor=red style=filled fontcolor=white];";
@@ -479,7 +479,7 @@ void FibonacciHeap::getDrawStartingOfNodeByModeOne
     }
 }
 
-const std::string FibonacciHeap::getDrawModeOne()
+const std::string FibonacciHeapDS::getDrawModeOne()
 {
     std::string textToFile = "digraph g{";
     textToFile += "rankdir = TB;";
@@ -501,7 +501,7 @@ const std::string FibonacciHeap::getDrawModeOne()
     return textToFile;
 }
 
-const std::string FibonacciHeap::getDrawModeTwo()
+const std::string FibonacciHeapDS::getDrawModeTwo()
 {
     std::string textToFile = "digraph g{";
     textToFile += "node [shape=plaintext ];";
@@ -532,7 +532,7 @@ const std::string FibonacciHeap::getDrawModeTwo()
     return textToFile;
 }
 
-FibonacciHeapNode* FibonacciHeap::mergeSubTrees
+FibonacciHeapNode* FibonacciHeapDS::mergeSubTrees
 (
       FibonacciHeapNode* rootOne,
       FibonacciHeapNode* rootTwo
@@ -584,7 +584,7 @@ FibonacciHeapNode* FibonacciHeap::mergeSubTrees
     }
 }
 
-FibonacciHeapNode* FibonacciHeap::deleteMin()
+FibonacciHeapNode* FibonacciHeapDS::deleteMin()
 {
     //Take the pointer to the minimum element in the tree
     //Remove this root and promote the childrens to root
@@ -609,7 +609,7 @@ FibonacciHeapNode* FibonacciHeap::deleteMin()
                     this->countOfRoots++;
                 }
 
-                this->start->marked = NO;
+                this->start->marked = FHMarkedNO;
             }
             else
             {
@@ -635,7 +635,7 @@ FibonacciHeapNode* FibonacciHeap::deleteMin()
             while (child != nullptr) //Quando acabar os elementos, ocorrerá um break
             {
                 child->father = nullptr;
-                child->marked = NO; //Por definição
+                child->marked = FHMarkedNO; //Por definição
 
                 //deve remover do link dos seus irmãos
                 if (child->next == child)
@@ -676,7 +676,7 @@ FibonacciHeapNode* FibonacciHeap::deleteMin()
     return nodeWithMinimumValueBackup;
 }
 
-void FibonacciHeap::consolidateFunction()
+void FibonacciHeapDS::consolidateFunction()
 {
     //Se a quantidade de elementos for menor que 0, 1 ou mais
     nodeWithMinimumValue = start; //mesmo que não seja
@@ -702,7 +702,7 @@ void FibonacciHeap::consolidateFunction()
                 vec[grau] = nullptr;
 
                 //Faz o merge com o removido
-                FibonacciHeapNode* newTree = FibonacciHeap::mergeSubTrees
+                FibonacciHeapNode* newTree = FibonacciHeapDS::mergeSubTrees
                 (
                       removedNodeOfList,
                       removedNodeOfVector

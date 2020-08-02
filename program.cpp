@@ -8,7 +8,7 @@ TEST_CASE( "Testing the insert calls in the heap", "[single-file]" )
 {
     SECTION( "Inserting" )
 	{
-		FibonacciHeap f;
+		FibonacciHeapDS f;
 		f.insertBeforeStart(50);
 		
 		FibonacciHeapNode *startNode = f.getStartNode();
@@ -59,7 +59,7 @@ TEST_CASE( "Testing the remove calls in the heap", "[single-file]" )
 {	
 	SECTION( "Removing the min" )
 	{
-		FibonacciHeap f;
+		FibonacciHeapDS f;
 		f.insertBeforeStart(50);	
 		f.insertBeforeStart(100);
 		f.insertBeforeStart(75);
@@ -121,7 +121,7 @@ TEST_CASE( "Testing the decrease calls in the heap", "[single-file]" )
 	{
 		//200 45 100 2 remmin
 		
-		FibonacciHeap f;
+		FibonacciHeapDS f;
 		f.insertBeforeStart(200);	
 		f.insertBeforeStart(45);
 		f.insertBeforeStart(100);
@@ -163,7 +163,7 @@ TEST_CASE( "Testing the decrease calls in the heap", "[single-file]" )
 	{
 		//200 45 100 2 remmin
 		
-		FibonacciHeap f;
+		FibonacciHeapDS f;
 		f.insertBeforeStart(200);	
 		f.insertBeforeStart(45);
 		f.insertBeforeStart(100);
@@ -221,7 +221,7 @@ TEST_CASE( "Testing the search calls in the heap", "[single-file]" )
 {	
 	SECTION( "search calls" )
 	{	
-		FibonacciHeap f;
+		FibonacciHeapDS f;
 		f.insertBeforeStart(50);	
 		f.insertBeforeStart(100);
 		f.insertBeforeStart(75);

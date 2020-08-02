@@ -6,11 +6,11 @@
 
 //Indicando que já teve um filho removido
 /*!
- * \brief The Marked enum
+ * \brief The FHMarked enum
  */
-enum Marked
+enum FHMarked
 {
-    YES, NO
+    FHMarkedYES, FHMarkedNO
 };
 
 /*!
@@ -31,7 +31,7 @@ struct FibonacciHeapNode
 
     int data = 0;
     int grau = 0; //quantidade de filhos
-    Marked marked = NO;
+    FHMarked marked = FHMarkedNO;
     struct FibonacciHeapNode* next = nullptr;
     struct FibonacciHeapNode* previous = nullptr;
 
@@ -40,17 +40,17 @@ struct FibonacciHeapNode
 };
 
 /*!
- * \brief The FibonacciHeap class
+ * \brief The FibonacciHeapDS class
  */
-class FibonacciHeap
+class FibonacciHeapDS
 {
 public:
     /*!
-     * \brief FibonacciHeap
+     * \brief FibonacciHeapDS
      */
-    FibonacciHeap();
+    FibonacciHeapDS();
 
-    ~FibonacciHeap();
+    ~FibonacciHeapDS();
     /*!
      * \brief insertBeforeStart
      * \param data
