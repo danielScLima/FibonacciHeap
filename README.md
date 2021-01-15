@@ -1,5 +1,6 @@
 FibonacciHeap
 ====================
+Building with Travis: [![Build Status](https://www.travis-ci.com/danielScLima/FibonacciHeap.svg?branch=master)](https://www.travis-ci.com/danielScLima/FibonacciHeap)
 
 This repository has a project with the implementation of a FibonacciHeap.
 
