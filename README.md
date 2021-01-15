@@ -1,5 +1,7 @@
 FibonacciHeap
 ====================
+Building with AppVeyor: [![Build status](https://ci.appveyor.com/api/projects/status/0qh3kpa9fywx23q1?svg=true)](https://ci.appveyor.com/project/DanielSLima/fibonacciheap)
+
 Building with Travis: [![Build Status](https://www.travis-ci.com/danielScLima/FibonacciHeap.svg?branch=master)](https://www.travis-ci.com/danielScLima/FibonacciHeap)
 
 This repository has a project with the implementation of a FibonacciHeap.
